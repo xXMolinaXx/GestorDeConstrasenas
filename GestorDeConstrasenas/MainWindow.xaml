@@ -1,0 +1,39 @@
+﻿<Window x:Class="GestorDeConstrasenas.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GestorDeConstrasenas"
+        mc:Ignorable="d"
+        Title="Gestor KM" Height="270" Width="400" WindowStyle="ToolWindow" >
+
+    <Grid Name="gridPrincipal" Background="#3F3F44" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition  ></ColumnDefinition>
+            <ColumnDefinition Width="1.5*" ></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="1"  HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label Content="Usuario"  HorizontalContentAlignment="Center" HorizontalAlignment="Center" Height="30" 
+               Width="86"  Foreground="White" FontSize="13" 
+               FontWeight="Black" />
+            <TextBox Height="25" Name="txtUsuario" Width="170" TextWrapping="Wrap" />
+            <Label Content="Contrasena"  HorizontalContentAlignment="Center" HorizontalAlignment="Center" Height="30" 
+               Width="86" Foreground="White" FontSize="13" 
+               FontWeight="Black" />
+            <PasswordBox Height="25" Name="txtContrasena" Margin="18,0,17,0" Width="170"/>
+            <Grid Height="36" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Name="btnIngresar" Height="21" BorderThickness="0"   Content="Ingresar" Width="50" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#FFF9F4F4" Click="Button_Click" />
+                <Button Name="btnRegistro" Height="21"  Grid.Column="1" Content="Registrarse" Width="67" HorizontalAlignment="Center" VerticalAlignment="Center" Click="btnRegistro_Click" />
+            </Grid>
+
+        </StackPanel>
+        <Image Grid.Column="0" Height="100" Width="100" Source="imagenes/candado.png" Stretch="Fill" Opacity="0.995"  />
+
+
+    </Grid>
+   
+</Window>

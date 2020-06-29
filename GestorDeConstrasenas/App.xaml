@@ -1,0 +1,19 @@
+﻿<Application x:Class="GestorDeConstrasenas.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:GestorDeConstrasenas"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!--<ResourceDictionary Source="diccionario/diccionarioRecursos.xaml"></ResourceDictionary>
+            --></ResourceDictionary.MergedDictionaries>
+            <!--<Style TargetType="TextBox" x:Name="estiloNuevi">
+                <Setter Property="Background" Value="Black" />
+                <Setter Property="Foreground" Value="White"/>
+            </Style>-->
+        </ResourceDictionary>
+    </Application.Resources>
+    
+    
+</Application>

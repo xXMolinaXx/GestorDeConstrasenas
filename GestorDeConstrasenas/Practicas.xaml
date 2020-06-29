@@ -1,0 +1,94 @@
+﻿<Window x:Class="GestorDeConstrasenas.Practicas"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GestorDeConstrasenas"
+        mc:Ignorable="d"
+        Title="Practicas" Height="550" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition  ></ColumnDefinition>
+            <ColumnDefinition  ></ColumnDefinition>
+            <ColumnDefinition Width="*" ></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="1">
+            <TextBox Name="txt1" HorizontalAlignment="Center" Margin="10" Text="{Binding ElementName=txt2,Mode=TwoWay,Path=Text}" Width="200" Height="40"></TextBox>
+
+            <TextBox Name="txt2" HorizontalAlignment="Center"  Width="200" Margin="10" Height="40" ></TextBox>
+        
+            <Label Content="prueba InotifyPropertyChanges" HorizontalAlignment="Center" FontFamily="arial" FontSize="15" Width="210" />
+
+            <TextBox  Name="txt3" HorizontalAlignment="Center"  Width="200" Height="40" Text="{Binding Path=Nombre,Mode=TwoWay}" ></TextBox>
+
+            <TextBox Name="txt4" HorizontalAlignment="Center" Margin="10" Width="200" Height="40" Text="{Binding Path=Apellido,Mode=TwoWay}" ></TextBox>
+
+            <TextBox Name="txt5" HorizontalAlignment="Center" Margin="10" Width="200" Height="40" Text="{Binding Path=Nombre_completo,Mode=OneWay}" ></TextBox>
+
+        </StackPanel>
+        <Grid Grid.Column="0" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+            </Grid.RowDefinitions>
+            <ListBox Name="listaPersona" HorizontalContentAlignment="Stretch"  Grid.Row="0">
+                <ListBox.ItemTemplate>
+
+                    <DataTemplate>
+
+                        <Grid >
+
+                            <Grid.ColumnDefinitions  >
+
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                
+
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0"  Text="{Binding Nombre}"></TextBlock>
+                            <TextBlock Grid.Column="1"  Text="{Binding Apellido}"></TextBlock>
+
+                        </Grid>
+                    
+                    </DataTemplate>
+                
+                </ListBox.ItemTemplate>
+            
+            </ListBox>
+            <ListBox Name="listaBD" HorizontalContentAlignment="Stretch"  Grid.Row="1" ></ListBox>
+            <Button Content="ver" Background="Azure" Grid.Row="2" Click="Button_Click" />
+
+        </Grid>
+
+        <StackPanel Grid.Column="2">
+            <ComboBox Name="CBpersonas" SelectionChanged="CBpersonas_Selected">
+                
+                <!--<ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            
+                            <TextBlock Text="{Binding Nombre}" FontSize="20"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>-->
+            </ComboBox>
+
+            <Border Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="Black" BorderThickness="2">
+               <!--wrap panel sirve para colocar todos los objetos de lado y stack panel es para ponerlo debajo de otro
+                -->
+                <WrapPanel Background="LightBlue" Width="200" Height="100">
+                    <Button  >Button 1</Button>
+                    <Button>Button 2</Button>
+                    <Button>Button 3</Button>
+                    <Button>Button 4</Button>
+                </WrapPanel>
+            </Border>
+
+        </StackPanel> 
+
+        
+
+    </Grid>
+</Window>
