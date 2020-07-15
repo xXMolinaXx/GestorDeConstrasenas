@@ -56,6 +56,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="conexionBD.cs" />
     <Compile Include="gestor_KM_BDDataSet.cs">
       <DependentUpon>gestor_KM_BDDataSet.xsd</DependentUpon>
     </Compile>

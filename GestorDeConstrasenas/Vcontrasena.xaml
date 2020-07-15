@@ -5,8 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GestorDeConstrasenas"
         mc:Ignorable="d"
-        Title="Vcontrasena" Height="450" Width="800">
-    <Grid>
+        Title="Gestor KM" Height="450" Width="800">
+    <Grid Background="#3F3F44">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel>
+            <Label Name="LmostrarUsuario" Content="Bienvenido " Foreground="White"/>
+            <ListBox Name="LBmostrarContrasena" Height="340" HorizontalContentAlignment="Stretch"  Margin="30,4,30,30.4" Grid.Column="0" FontSize="18"  Padding="10" ></ListBox>
+        </StackPanel>
+       
         
     </Grid>
 </Window>

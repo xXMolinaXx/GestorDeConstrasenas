@@ -26,8 +26,8 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button Name="btnIngresar" Height="21" BorderThickness="0"   Content="Ingresar" Width="50" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#FFF9F4F4" Click="Button_Click" />
-                <Button Name="btnRegistro" Height="21"  Grid.Column="1" Content="Registrarse" Width="67" HorizontalAlignment="Center" VerticalAlignment="Center" Click="btnRegistro_Click" />
+                <Button Name="btnIngresar" Height="21" BorderThickness="0"   Content="Ingresar" Width="50" HorizontalAlignment="Center" VerticalAlignment="Center"  Click="btnIngresar_Click" />
+                <Button Name="btnRegistro" Height="21" BorderThickness="0"  Grid.Column="1" Content="Registrarse" Width="67" HorizontalAlignment="Center" VerticalAlignment="Center" Click="btnRegistro_Click" />
             </Grid>
 
         </StackPanel>
@@ -35,5 +35,5 @@
 
 
     </Grid>
-   
+
 </Window>

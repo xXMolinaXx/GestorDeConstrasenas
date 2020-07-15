@@ -13,7 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Configuration;
-using System.Data.SqlClient;
+using System.Data.SqlClient;//clases utilizada para bases de datos
+using System.Data;//clases utilizada para bases de datos
 
 namespace GestorDeConstrasenas
 {
@@ -22,65 +23,115 @@ namespace GestorDeConstrasenas
     /// </summary>
     public partial class MainWindow : Window
     {
-        SqlConnection miConexionSql;
-        String Vusuario, Vcontrasena;
-        string miConexion = ConfigurationManager.ConnectionStrings["GestorDeConstrasenas.Properties.Settings.gestor_KM_BDConnectionString"].ConnectionString;
+        
+        SqlConnection miConexionServidor;
+        string stringConexion = ConfigurationManager.ConnectionStrings["GestorDeConstrasenas.Properties.Settings.gestor_KM_BDConnectionString"].ConnectionString;
+        
         public MainWindow()
         {
             InitializeComponent();
-            
-             miConexionSql = new SqlConnection(miConexion);
-            miConexionSql.Open();
-
-
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        //////////////////////FUNCION PARA INGRESAR A LA PLATAFORMA///////////////////
+        private void btnIngresar_Click(object sender, RoutedEventArgs e)
         {
-            string queryString =
-        "select usuarios,contrasena from usuarios;";
-            using (SqlConnection connection = new SqlConnection(
-                       miConexion))
+            int respuestaPA;
+            miConexionServidor = new SqlConnection(stringConexion);
+
+
+
+            if (!String.IsNullOrEmpty(txtUsuario.Text) && !String.IsNullOrEmpty(txtContrasena.Password))
             {
-                SqlCommand command = new SqlCommand(
-                    queryString, connection);
-                connection.Open();
-                using (SqlDataReader reader = command.ExecuteReader())
+                using (miConexionServidor)//aqui usamos la conexion a la bd 
                 {
-                    while (reader.Read())
-                    {
-                        Console.WriteLine(String.Format("{0}, {1}",
-                            reader[0], reader[1]));
+                    miConexionServidor.Open();
+                    //creamos un instancia de comandos mandamos el nombre del procedimiento y la conexion a la base de datos
+                    SqlCommand cmd = new SqlCommand("PingresarUsuario", miConexionServidor);
+                    //definimos que la instancia cmd es tipo procedimeinto almacenado
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    //agregamos los parametros a la query
+                    cmd.Parameters.AddWithValue("@usuario", txtUsuario.Text);
+                    cmd.Parameters.AddWithValue("@contrasena", txtContrasena.Password);
+                    cmd.Parameters.Add("@respuesta", SqlDbType.Int).Direction = ParameterDirection.Output;
 
-                        if (txtUsuario.Text.Equals(reader[0]) /*&& txtContrasena.Password.Equals(reader[1])*/)
-                        {
+                    cmd.ExecuteReader();
 
-                            Vcontrasena venContr = new Vcontrasena();
-                            venContr.Show();
-                            this.Close();
+                    respuestaPA = Convert.ToInt32(cmd.Parameters["@respuesta"].Value);
+                }
 
-                        }
-                        
-                           
-                        
-                    }
+                if (respuestaPA == 1)
+                {
+                   
+                    Vcontrasena ventana = new Vcontrasena(txtUsuario.Text);
+                    ventana.Show();
+                    this.Close();
+                   
+                }
+                else
+                {
+
+                    MessageBox.Show("error en el usuario o campo");
                 }
             }
-            MessageBox.Show("datos incorrectos");
-        }
+            else
+            {
+                MessageBox.Show("campos vacios porfavor llene ambos campos");
+            }
+            miConexionServidor.Close();
 
+        }
+        //////////////////////FUNCION PARA REGISTRAR A LA PLATAFORMA///////////////////
         private void btnRegistro_Click(object sender, RoutedEventArgs e)
         {
-            string consulta = "execute PcrearUsuario '"+ txtUsuario.Text + " ','"+ txtContrasena.Password.ToString() + "' ";
-            MessageBox.Show(txtUsuario.Text + txtContrasena.Password.ToString());
+            int respuestaPA;
+            miConexionServidor = new SqlConnection(stringConexion);
 
-            SqlCommand cmd = new SqlCommand(consulta, miConexionSql);
-            cmd.ExecuteNonQuery();
-            miConexionSql.Close();
-            /*Practicas ventana = new Practicas();
-            ventana.Show();
-            this.Close();*/
+
+
+            if (!String.IsNullOrEmpty(txtUsuario.Text) && !String.IsNullOrEmpty(txtContrasena.Password))
+            {
+                using (miConexionServidor)//aqui usamos la conexion a la bd 
+                {
+                    miConexionServidor.Open();
+                    //creamos un instancia de comandos mandamos el nombre del procedimiento y la conexion a la base de datos
+                    SqlCommand cmd = new SqlCommand("PcrearUsuario", miConexionServidor);
+                    //definimos que la instancia cmd es tipo procedimeinto almacenado
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    //agregamos los parametros a la query
+                    cmd.Parameters.AddWithValue("@usuario", txtUsuario.Text);
+                    cmd.Parameters.AddWithValue("@contrasena", txtContrasena.Password);
+                    cmd.Parameters.Add("@IngresiExitoso", SqlDbType.Int).Direction = ParameterDirection.Output;
+
+                    cmd.ExecuteReader();
+
+                    /*if (lectura.)
+                    {
+                        Vcontrasena ventana = new Vcontrasena();
+                        ventana.Show();
+                        this.Close();
+                        MessageBox.Show("entrando");
+                    }*/
+
+                    respuestaPA = Convert.ToInt32(cmd.Parameters["@IngresiExitoso"].Value);
+                }
+
+                if (respuestaPA == 1) { 
+                    Vcontrasena ventana = new Vcontrasena();
+                ventana.Show();
+                this.Close();
+                MessageBox.Show("entrando");
+                }
+                else
+                {
+
+                    MessageBox.Show("error dentro de procedimiento almacenado");
+                }
+            }
+            else {
+                MessageBox.Show("campos vacios porfavor llene ambos campos");
+            }
+            miConexionServidor.Close();
         }
     }
 }

@@ -33,16 +33,16 @@ namespace GestorDeConstrasenas
         {
             InitializeComponent();
             String miConexion = ConfigurationManager.ConnectionStrings["GestorDeConstrasenas.Properties.Settings.gestor_KM_BDConnectionString"].ConnectionString;
-            
+
             miConexionSql = new SqlConnection(miConexion);
 
-           
 
-            
+
+
 
             persona = new juntarN() { Nombre = "kenny", Apellido = "molina" };
-          
-       
+
+
 
             this.DataContext = persona;
 
@@ -57,6 +57,8 @@ namespace GestorDeConstrasenas
             CBpersonas.ItemsSource = listPob;
 
             mostrar();
+
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -66,13 +68,13 @@ namespace GestorDeConstrasenas
 
         }
         //------------------------aqui empieza la funcion para mostrar la consulta   
-        private void mostrar() 
+        private void mostrar()
         {
             string consulta = "SELECT idUsuario,nombreUsuario FROM usuarios ";
 
-            SqlDataAdapter miAdapSql = new SqlDataAdapter(consulta,miConexionSql);
+            SqlDataAdapter miAdapSql = new SqlDataAdapter(consulta, miConexionSql);
 
-            using (miAdapSql) 
+            using (miAdapSql)
             {
                 DataTable usTabla = new DataTable();
 
@@ -93,7 +95,20 @@ namespace GestorDeConstrasenas
         {
             MessageBox.Show(Convert.ToString(CBpersonas.SelectedValue));
         }
+
+        private void listaPersona_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
         //------------------------aqui termina la funcion para mostrar la consulta   
+
+
+        //PRACTICANDO CODIGOS PAGINA OFICIAL MICROSOFT
+        void PrintText(object sender, SelectionChangedEventArgs args)
+        {
+            ListBoxItem lbi = ((sender as ListBox).SelectedItem as ListBoxItem);
+            tb.Text = "   You selected " + lbi.Content.ToString() + ".";
+        }
 
     }
 
@@ -114,6 +129,14 @@ namespace GestorDeConstrasenas
         public string Apellido { get => apellido; set => apellido = value; }
         public string Apellido2 { get => apellido2; set => apellido2 = value; }
     }
+
+
+
+
+
+
+
+
 
     
 
